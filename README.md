@@ -49,4 +49,3 @@ Open the local URL shown in the terminal, then select a downloaded model from th
 ```bash
 llama update
 ```
-# Local-AI-Model-Library
