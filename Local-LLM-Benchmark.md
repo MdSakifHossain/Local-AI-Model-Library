@@ -29,7 +29,7 @@
 | Model                                                        | General | Reasoning | Coding | Debugging | Writing | Math | Instruction Following | Hallucination | Context | Long Output |
 | ------------------------------------------------------------ | :-----: | :-------: | :----: | :-------: | :-----: | :--: | :-------------------: | :-----------: | :-----: | :---------: |
 | GnLOLot/MiniCPM5-1B-Claude-Opus-Fable5-V2-Thinking-GGUF:Q8_0 |    3    |     2     |   4    |     5     |    5    |  5   |           1           |       5       |    2    |      2      |
-| HuggingFaceTB/SmolLM2-1.7B-Instruct-GGUF:Q4_K_M              |    4    |     5     |   7    |           |         |      |                       |               |         |             |
+| HuggingFaceTB/SmolLM2-1.7B-Instruct-GGUF:Q4_K_M              |    4    |     5     |   7    |     2     |    4    |  2   |           4           |       2       |    2    |      2      |
 | Qwen/Qwen2.5-0.5B-Instruct-GGUF:Q4_K_M                       |         |           |        |           |         |      |                       |               |         |             |
 | Qwen/Qwen2.5-1.5B-Instruct-GGUF:Q4_K_M                       |         |           |        |           |         |      |                       |               |         |             |
 | Qwen/Qwen2.5-3B-Instruct-GGUF:Q4_K_M                         |         |           |        |           |         |      |                       |               |         |             |
