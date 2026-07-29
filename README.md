@@ -56,15 +56,15 @@ choose the model you want to download example: `Qwen/Qwen2.5-0.5B-Instruct-GGUF:
 
 Keep the `org_name/model_name` structure.
 
-### Download modle
+### Download model
 
 - Go to Hugging Face and Download the `GGUF` file.
-- Use `wget` or something else, just dont use `llama download -hf org_name/modle_name`.
+- Use `wget` or something else, just dont use `llama download -hf org_name/model_name`.
 
 Note: `Llama` can't download on android because its not the same environment as PC
 
 ### Run the server
 
 ```bash
-llama serve --models-dir path/to/modles/dir
+llama serve --models-dir path/to/models/dir
 ```
