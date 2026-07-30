@@ -27,3 +27,4 @@ HuggingFaceTB/SmolLM2-1.7B-Instruct-GGUF:Q4_K_M
 bartowski/HuggingFaceTB_SmolLM3-3B-GGUF:Q4_K_M
 ibm-granite/granite-3.3-2b-instruct-GGUF:Q4_K_M
 ibm-granite/granite-3.3-8b-instruct-GGUF:Q4_K_M
+ibm-granite/granite-4.1-3b-GGUF:Q4_K_M
