@@ -1,5 +1,8 @@
 GnLOLot/MiniCPM5-1B-Claude-Opus-Fable5-V2-Thinking-GGUF:Q8_0
 HuggingFaceTB/SmolLM2-1.7B-Instruct-GGUF:Q4_K_M
+LiquidAI/LFM2.5-1.2B-Instruct-GGUF:Q4_K_M
+LiquidAI/LFM2.5-1.2B-Thinking-GGUF:Q4_K_M
+LiquidAI/LFM2.5-8B-A1B-GGUF:Q4_K_M
 Qwen/Qwen2.5-0.5B-Instruct-GGUF:Q4_K_M
 Qwen/Qwen2.5-1.5B-Instruct-GGUF:Q4_K_M
 Qwen/Qwen2.5-3B-Instruct-GGUF:Q4_K_M
@@ -33,5 +36,6 @@ ibm-granite/granite-3.3-8b-instruct-GGUF:Q4_K_M
 ibm-granite/granite-4.1-3b-GGUF:Q4_K_M
 ibm-granite/granite-4.1-8b-GGUF:Q4_K_M
 nvidia/NVIDIA-Nemotron-3-Nano-4B-GGUF:Q4_K_M
+unsloth/Ornith-1.0-9B-GGUF:Q4_K_M
 unsloth/Phi-4-mini-instruct-GGUF:Q4_K_M
 unsloth/Phi-4-mini-reasoning-GGUF:Q4_K_M
