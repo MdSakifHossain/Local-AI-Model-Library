@@ -1,5 +1,7 @@
 GnLOLot/MiniCPM5-1B-Claude-Opus-Fable5-V2-Thinking-GGUF:Q8_0
 HuggingFaceTB/SmolLM2-1.7B-Instruct-GGUF:Q4_K_M
+Jackrong/Qwen3.5-2B-Claude-4.6-Opus-Reasoning-Distilled-GGUF:Q4_K_M
+Jackrong/Qwen3.5-4B-Claude-4.6-Opus-Reasoning-Distilled-GGUF:Q4_K_M
 LiquidAI/LFM2.5-1.2B-Instruct-GGUF:Q4_K_M
 LiquidAI/LFM2.5-1.2B-Thinking-GGUF:Q4_K_M
 LiquidAI/LFM2.5-8B-A1B-GGUF:Q4_K_M
