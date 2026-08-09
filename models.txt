@@ -22,7 +22,6 @@ Qwen/Qwen3-0.6B-GGUF:Q8_0
 Qwen/Qwen3-1.7B-GGUF:Q8_0
 Qwen/Qwen3-4B-GGUF:Q4_K_M
 Qwen/Qwen3-8B-GGUF:Q4_K_M
-SupraLabs/Supra2-100M-Instruct:F16
 bartowski/DeepSeek-Coder-V2-Lite-Instruct-GGUF:Q4_K_M
 bartowski/DeepSeek-R1-Distill-Llama-8B-GGUF:Q4_K_M
 bartowski/DeepSeek-R1-Distill-Qwen-7B-GGUF:Q4_K_M
@@ -46,11 +45,12 @@ ibm-granite/granite-3.3-8b-instruct-GGUF:Q4_K_M
 ibm-granite/granite-4.1-3b-GGUF:Q4_K_M
 ibm-granite/granite-4.1-8b-GGUF:Q4_K_M
 nvidia/NVIDIA-Nemotron-3-Nano-4B-GGUF:Q4_K_M
-prism-ml/Bonsai-1.7B-gguf:Q1_0
-prism-ml/Bonsai-4B-gguf:Q1_0
-prism-ml/Bonsai-8B-gguf:Q1_0
+unsloth/ERNIE-4.5-21B-A3B-Thinking-GGUF:Q4_K_M
+unsloth/GLM-4.7-Flash-GGUF:Q4_K_M
+unsloth/GLM-4.7-Flash-REAP-23B-A3B-GGUF:Q4_K_M
 unsloth/Ornith-1.0-9B-GGUF:Q4_K_M
 unsloth/Phi-4-mini-instruct-GGUF:Q4_K_M
 unsloth/Phi-4-mini-reasoning-GGUF:Q4_K_M
 unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF:Q4_K_M
+unsloth/gemma-4-26B-A4B-it-GGUF:Q4_K_M
 unsloth/gpt-oss-20b-GGUF:Q4_K_M
