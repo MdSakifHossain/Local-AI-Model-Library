@@ -1,6 +1,8 @@
 GnLOLot/MiniCPM5-1B-Claude-Opus-Fable5-Thinking-GGUF:Q4_K_M
 GnLOLot/MiniCPM5-1B-Claude-Opus-Fable5-V2-Thinking-GGUF:Q8_0
 HuggingFaceTB/SmolLM2-1.7B-Instruct-GGUF:Q4_K_M
+Jackrong/GPT-5-Distill-Qwen3-4B-Instruct-GGUF:Q4_K_M
+Jackrong/GPT-5-Distill-llama3.2-3B-Instruct-GGUF:Q4_K_M
 Jackrong/Qwen3.5-0.8B-Claude-4.6-Opus-Reasoning-Distilled-GGUF:Q4_K_M
 Jackrong/Qwen3.5-2B-Claude-4.6-Opus-Reasoning-Distilled-GGUF:Q4_K_M
 Jackrong/Qwen3.5-4B-Claude-4.6-Opus-Reasoning-Distilled-GGUF:Q4_K_M
@@ -36,6 +38,9 @@ bartowski/tencent_Hunyuan-0.5B-Instruct-GGUF:Q4_K_M
 bartowski/tencent_Hunyuan-1.8B-Instruct-GGUF:Q4_K_M
 bartowski/tencent_Hunyuan-4B-Instruct-GGUF:Q4_K_M
 bartowski/tencent_Hunyuan-7B-Instruct-GGUF:Q4_K_M
+empero-ai/Qwen3.8-2B-GGUF:Q4_K_M
+empero-ai/Qwen3.8-4B-GGUF:Q4_K_M
+empero-ai/Qwen3.8-9B-GGUF:Q4_K_M
 ggml-org/gemma-3-1b-it-GGUF:Q4_K_M
 ggml-org/gemma-3-4b-it-GGUF:Q4_K_M
 ggml-org/gemma-4-E2B-it-GGUF:Q4_0
@@ -54,3 +59,4 @@ unsloth/Phi-4-mini-reasoning-GGUF:Q4_K_M
 unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF:Q4_K_M
 unsloth/gemma-4-26B-A4B-it-GGUF:Q4_K_M
 unsloth/gpt-oss-20b-GGUF:Q4_K_M
+webAI-Official/TwIL-LM3:Q4_K_M
