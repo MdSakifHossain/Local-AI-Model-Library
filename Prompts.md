@@ -2,10 +2,68 @@
 
 ## Web
 
+### Prompt:
+
 ```txt
-make me a js string reverse function with jsdoc. it will only accept string. and it will efficiently return the reversed string. think of this code will run in a super tight production environment. performance is what expected. think of this code to run in a production environment this will run for 50k to 1M times a minute also make sure that it this works with emojis and special characters. im thinking abut the less operations, less conversions. as less as it could get. think of all the edge cases carefully. also use modern js syntax
+Complete ALL FOUR parts below. Label each part exactly as shown.
+Keep answers short — use the exact answer format requested.
+
+PART 1 — Arithmetic
+Starting from 26, apply these steps in order:
+  1. Add 14
+  2. Multiply the result by 3
+  3. Subtract 48
+  4. Divide the result by 2
+  5. Subtract the original starting number
+Write each intermediate value as "Step N: <number>", then "Final: <number>".
+
+PART 2 — Logic
+Four friends — Ana, Ben, Cara, Dev — sit in chairs numbered 1 to 4.
+- Ana is not in chair 1 or chair 4.
+- Ben sits immediately to the right of Cara.
+- Dev sits somewhere to the left of Ben.
+Answer in exactly this format:
+Chair 1: <name>
+Chair 2: <name>
+Chair 3: <name>
+Chair 4: <name>
+
+PART 3 — Code reading
+What does this JavaScript code print?
+
+const arr = [4, 1, 2, 1, 4];
+const seen = new Set();
+let answer = -1;
+for (const n of arr) {
+  if (seen.has(n)) {
+    seen.add(n);
+  } else {
+    answer = n;
+  }
+}
+console.log(answer);
+
+ANSWER: <value>
+
+PART 4 — Extraction
+Records:
+- laptop, price 1299, in stock: yes
+- mouse, price 25, in stock: no
+- keyboard, price 79, in stock: yes
+- monitor, price 349, in stock: yes
+
+Output ONLY the price of the second cheapest in-stock item, in this format:
+ANSWER: <price>
 ```
 
+### Evaluation Metric:
+
+|Part|What to check|Correct value|Points|
+|---|---|---|--:|
+|P1|`Final: <number>`|`10`|25|
+|P2|four `Chair N:` lines|`Dev, Ana, Cara, Ben`|25|
+|P3|`ANSWER: <value>`|`4`|25|
+|P4|`ANSWER: <price>`|`349`|25|
 ## Agent
 
 ````markdown
