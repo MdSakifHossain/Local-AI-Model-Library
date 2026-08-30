@@ -58,12 +58,12 @@ ANSWER: <price>
 
 ### Evaluation Metric:
 
-|Part|What to check|Correct value|Points|
-|---|---|---|--:|
-|P1|`Final: <number>`|`10`|25|
-|P2|four `Chair N:` lines|`Dev, Ana, Cara, Ben`|25|
-|P3|`ANSWER: <value>`|`4`|25|
-|P4|`ANSWER: <price>`|`349`|25|
+| Part | Hook for this Task     | What to check         | Points |         Correct value |
+| ---- | ---------------------- | --------------------- | :----: | --------------------: |
+| P1   | Step-by-Step Math      | `Final: <number>`     |   25   |                  `10` |
+| P2   | Chair Logic            | four `Chair N:` lines |   25   | `Dev, Ana, Cara, Ben` |
+| P3   | Code reading           | `ANSWER: <value>`     |   25   |                   `4` |
+| P4   | Stock Price Extraction | `ANSWER: <price>`     |   25   |                 `349` |
 ## Agent
 
 ````markdown
