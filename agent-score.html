@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Agent Score — Coding Agent Test</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0b0d0e;
+            --line: #20262a;
+            --line2: #2d353b;
+            --text: #e8edf0;
+            --dim: #8a949c;
+            --faint: #525b62;
+            --green: #3fdc84;
+            --lime: #a9c75b;
+            --amber: #e0a84b;
+            --red: #e0655a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .wrap {
+            max-width: 740px;
+            margin: 0 auto;
+            padding: 56px 20px 64px
+        }
+
+        /* ---- header ---- */
+        header {
+            text-align: center
+        }
+
+        .label {
+            font-size: 11px;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: var(--dim)
+        }
+
+        .big {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: clamp(4.5rem, 16vw, 7.5rem);
+            line-height: 1.05;
+            letter-spacing: -.03em;
+            margin-top: 6px;
+            font-variant-numeric: tabular-nums;
+            transition: color .3s;
+        }
+
+        .big.max {
+            color: var(--green)
+        }
+
+        .of {
+            color: var(--faint);
+            font-size: 14px;
+            margin-top: 2px
+        }
+
+        .track {
+            width: 180px;
+            height: 2px;
+            background: var(--line);
+            margin: 26px auto 0;
+            overflow: hidden
+        }
+
+        .fill {
+            height: 100%;
+            width: 0%;
+            background: var(--red);
+            transition: width .25s ease, background-color .3s
+        }
+
+        /* ---- criteria list ---- */
+        .list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 44px
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 2.4rem 1fr auto auto;
+            grid-template-areas: "num desc pts seg";
+            align-items: center;
+            gap: 14px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 14px 16px;
+            transition: border-color .15s;
+        }
+
+        .row:hover {
+            border-color: var(--line2)
+        }
+
+        .row:focus-visible {
+            outline: none;
+            border-color: var(--green)
+        }
+
+        .seg button:focus-visible,
+        .btn:focus-visible {
+            outline: 1px solid var(--green);
+            outline-offset: 2px;
+        }
+
+        .row.done {
+            box-shadow: inset 2px 0 0 var(--green)
+        }
+
+        .num {
+            grid-area: num;
+            font-size: 12px;
+            color: var(--faint);
+            font-variant-numeric: tabular-nums
+        }
+
+        .row.done .num {
+            color: var(--green)
+        }
+
+        .desc {
+            grid-area: desc;
+            font-size: 13.5px;
+            font-weight: 500
+        }
+
+        .desc code {
+            font-family: inherit;
+            font-size: 12px;
+            color: #cdd6db;
+            background: #161b1e;
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 1px 5px;
+        }
+
+        .pts {
+            grid-area: pts;
+            font-size: 12px;
+            color: var(--dim);
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+            min-width: 5.5ch;
+        }
+
+        .seg {
+            grid-area: seg;
+            display: inline-flex;
+            border: 1px solid var(--line2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .seg button {
+            font-family: inherit;
+            font-size: 12px;
+            color: var(--dim);
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            padding: 7px 15px;
+            transition: background .12s, color .12s;
+        }
+
+        .seg button+button {
+            border-left: 1px solid var(--line2)
+        }
+
+        .seg button:hover {
+            color: var(--text);
+            background: rgba(255, 255, 255, .03)
+        }
+
+        .seg button.on {
+            font-weight: 700
+        }
+
+        .seg button.on.full {
+            background: rgba(63, 220, 132, .14);
+            color: var(--green)
+        }
+
+        .seg button.on.half {
+            background: rgba(224, 168, 75, .15);
+            color: var(--amber)
+        }
+
+        .seg button.on.zero {
+            background: rgba(224, 101, 90, .13);
+            color: var(--red)
+        }
+
+        /* ---- summary ---- */
+        .summary {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            border-top: 1px solid var(--line);
+            margin-top: 30px;
+            padding-top: 22px;
+        }
+
+        .badge {
+            font-size: 11px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            border: 1px solid;
+            border-radius: 999px;
+            padding: 5px 13px;
+        }
+
+        .passed {
+            font-size: 12px;
+            color: var(--dim)
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-family: inherit;
+            font-size: 12px;
+            color: var(--dim);
+            cursor: pointer;
+            background: transparent;
+            border: 1px solid var(--line2);
+            border-radius: 8px;
+            padding: 8px 15px;
+            transition: color .15s, border-color .15s;
+        }
+
+        .btn:hover {
+            color: var(--text);
+            border-color: var(--dim)
+        }
+
+        .btn.ok {
+            color: var(--green);
+            border-color: var(--green)
+        }
+
+        .btn.danger:hover {
+            color: var(--red);
+            border-color: var(--red)
+        }
+
+        .btn.solid-danger {
+            background: rgba(224, 101, 90, .12);
+            color: var(--red);
+            border-color: rgba(224, 101, 90, .5)
+        }
+
+        .btn.solid-danger:hover {
+            background: rgba(224, 101, 90, .2);
+            border-color: var(--red)
+        }
+
+        #copyBtn {
+            margin-left: auto
+        }
+
+        .hint {
+            margin-top: 18px;
+            font-size: 11px;
+            color: var(--faint);
+            text-align: center
+        }
+
+        /* ---- reset confirm modal ---- */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(6, 8, 9, .72);
+            backdrop-filter: blur(2px);
+            padding: 20px;
+        }
+
+        .overlay[hidden] {
+            display: none
+        }
+
+        .dialog {
+            width: min(380px, 100%);
+            background: #111517;
+            border: 1px solid var(--line2);
+            border-radius: 12px;
+            padding: 22px 24px;
+        }
+
+        .dialog h2 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px
+        }
+
+        .dialog p {
+            font-size: 12px;
+            color: var(--dim);
+            line-height: 1.6;
+            margin-bottom: 20px
+        }
+
+        .dlg-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px
+        }
+
+        @media (max-width:600px) {
+            .row {
+                grid-template-columns: 2rem 1fr auto;
+                grid-template-areas: "num desc pts" "seg seg seg";
+                row-gap: 12px;
+            }
+
+            .seg {
+                justify-self: start
+            }
+
+            #copyBtn {
+                margin-left: 0
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+
+        <header>
+            <p class="label">Agent Score</p>
+            <div class="big" id="big">0</div>
+            <p class="of">/ 100</p>
+            <div class="track">
+                <div class="fill" id="fill"></div>
+            </div>
+        </header>
+
+        <main>
+            <section class="list" id="list" aria-label="Scoring criteria"></section>
+
+            <section class="summary">
+                <span class="badge" id="badge">Poor</span>
+                <span class="passed" id="passed">0 / 9 criteria passed</span>
+                <button class="btn" id="copyBtn">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="12" height="12" rx="2" />
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                    </svg>
+                    <span>Copy score</span>
+                </button>
+                <button class="btn danger" id="resetBtn">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 12a9 9 0 1 0 3-6.7L3 8" />
+                        <path d="M3 3v5h5" />
+                    </svg>
+                    <span>Reset</span>
+                </button>
+            </section>
+
+            <p class="hint">1–9 select a criterion &nbsp;·&nbsp; &uarr; &darr; move &nbsp;·&nbsp; 0 / H / F set fail ·
+                half · full &nbsp;·&nbsp; C copy score &nbsp;·&nbsp; R reset</p>
+        </main>
+
+    </div>
+
+    <!-- reset confirmation modal -->
+    <div class="overlay" id="overlay" hidden>
+        <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlgTitle" aria-describedby="dlgMsg">
+            <h2 id="dlgTitle">Reset all scores?</h2>
+            <p id="dlgMsg">Every criterion will return to 0 and the total will be cleared. This cannot be undone.</p>
+            <div class="dlg-actions">
+                <button class="btn" id="cancelBtn">Cancel</button>
+                <button class="btn solid-danger" id="confirmBtn">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (() => {
+            const CRITERIA = [
+                { desc: 'Creates <code>agent_test.js</code> correctly', pts: 15 },
+                { desc: 'Reads and verifies the original file', pts: 10 },
+                { desc: 'Runs the original file and gets <code>5</code>', pts: 10 },
+                { desc: 'Correctly modifies the file', pts: 20 },
+                { desc: 'Reads and verifies the modified file', pts: 10 },
+                { desc: 'Runs the modified file', pts: 10 },
+                { desc: 'Verifies the output is <code>20</code>', pts: 10 },
+                { desc: 'Creates no other files', pts: 10 },
+                { desc: 'Reports whether every step succeeded', pts: 5 },
+            ];
+            const KINDS = { 0: ['0', 'zero'], 0.5: ['½', 'half'], 1: ['full', 'full'] };
+            const BANDS = [[90, 'Excellent', '#3fdc84'], [75, 'Good', '#a9c75b'],
+            [50, 'Partial', '#e0a84b'], [0, 'Poor', '#e0655a']];
+            const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            const $ = id => document.getElementById(id);
+            const list = $('list'), big = $('big'), fill = $('fill'),
+                badge = $('badge'), passedEl = $('passed'),
+                copyBtn = $('copyBtn'), resetBtn = $('resetBtn'),
+                overlay = $('overlay'), cancelBtn = $('cancelBtn'), confirmBtn = $('confirmBtn');
+
+            const state = CRITERIA.map(() => 0);
+            const fmt = v => Number.isInteger(v) ? String(v) : v.toFixed(1);
+            const total = () => state.reduce((s, m, i) => s + CRITERIA[i].pts * m, 0);
+
+            /* build rows */
+            CRITERIA.forEach((c, i) => {
+                const row = document.createElement('article');
+                row.className = 'row'; row.tabIndex = 0; row.dataset.i = i;
+                const seg = [0, 0.5, 1].map(m => {
+                    const [label, kind] = KINDS[m];
+                    return `<button data-m="${m}" data-kind="${kind}" aria-pressed="${m === 0}"
+        aria-label="${label} points for criterion ${i + 1}">${m === 0.5 ? c.pts / 2 : label}</button>`;
+                }).join('');
+                row.innerHTML = `
+      <span class="num">${String(i + 1).padStart(2, '0')}</span>
+      <h2 class="desc">${c.desc}</h2>
+      <span class="pts">${c.pts} pts</span>
+      <div class="seg" role="group" aria-label="Score for criterion ${i + 1}">${seg}</div>`;
+                list.appendChild(row);
+            });
+            const rows = [...list.children];
+
+            /* score tween (generation-guarded so stale frames can never repaint) */
+            let shown = 0, raf, gen = 0;
+            function tween(to) {
+                cancelAnimationFrame(raf);
+                const myGen = ++gen;
+                if (reduced) { shown = to; big.textContent = fmt(to); return; }
+                const from = shown, t0 = performance.now(), dur = 240;
+                const tick = t => {
+                    if (myGen !== gen) return;               // a newer animation took over
+                    const p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+                    shown = from + (to - from) * e;
+                    big.textContent = fmt(Math.round(shown * 2) / 2);
+                    if (p < 1) raf = requestAnimationFrame(tick);
+                };
+                tick(t0);
+            }
+
+            function setScore(i, m) {
+                state[i] = m;
+                const row = rows[i], c = CRITERIA[i];
+                row.querySelectorAll('.seg button').forEach(b => {
+                    const on = +b.dataset.m === m;
+                    b.classList.toggle('on', on);
+                    b.setAttribute('aria-pressed', on);
+                });
+                row.classList.toggle('done', m === 1);
+                row.querySelector('.pts').textContent =
+                    m === 0 ? `${c.pts} pts` : `${fmt(c.pts * m)} / ${c.pts}`;
+                render();
+            }
+
+            function render() {
+                const t = total();
+                const passed = state.filter(m => m === 1).length;
+                const [, name, color] = BANDS.find(([min]) => t >= min);
+                tween(t);
+                big.classList.toggle('max', t === 100);
+                badge.textContent = name;
+                badge.style.color = color;
+                badge.style.borderColor = color;
+                badge.style.background = color + '1c';
+                fill.style.width = t + '%';
+                fill.style.backgroundColor = color;
+                passedEl.textContent = `${passed} / 9 criteria passed`;
+            }
+
+            /* copy score */
+            let copyTimer;
+            function copyScore() {
+                const text = fmt(total());
+                const done = ok => {
+                    const label = copyBtn.querySelector('span');
+                    copyBtn.classList.toggle('ok', ok);
+                    label.textContent = ok ? 'Copied ✓' : 'Copy failed';
+                    clearTimeout(copyTimer);
+                    copyTimer = setTimeout(() => {
+                        copyBtn.classList.remove('ok');
+                        label.textContent = 'Copy score';
+                    }, 1400);
+                };
+                const fallback = () => {
+                    const ta = document.createElement('textarea');
+                    ta.value = text;
+                    ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none';
+                    document.body.appendChild(ta);
+                    ta.select();
+                    let ok = false;
+                    try { ok = document.execCommand('copy'); } catch { }
+                    ta.remove();
+                    return ok;
+                };
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(text).then(() => done(true), () => done(fallback()));
+                } else {
+                    done(fallback());
+                }
+            }
+
+            /* reset — in-page modal (native confirm() is blocked in sandboxed iframes) */
+            let lastFocus = null;
+            const modalOpen = () => !overlay.hidden;
+
+            function resetRequest() {
+                if (state.every(v => v === 0)) return;
+                lastFocus = document.activeElement;
+                overlay.hidden = false;
+                confirmBtn.focus();
+            }
+            function closeModal(confirmed) {
+                overlay.hidden = true;
+                if (confirmed) doReset();
+                (lastFocus || rows[0])?.focus?.();
+            }
+            function doReset() {
+                state.forEach((_, i) => setScore(i, 0));
+                gen++;                        // invalidate any in-flight tween frames
+                cancelAnimationFrame(raf);
+                shown = 0;
+                big.textContent = '0';
+                rows[0].focus();
+            }
+
+            /* interactions */
+            list.addEventListener('click', e => {
+                const b = e.target.closest('.seg button');
+                if (b) setScore(+b.closest('.row').dataset.i, +b.dataset.m);
+            });
+
+            let cur = 0;
+            list.addEventListener('focusin', e => {
+                const row = e.target.closest('.row');
+                if (row) cur = +row.dataset.i;
+            });
+
+            copyBtn.addEventListener('click', copyScore);
+            resetBtn.addEventListener('click', resetRequest);
+            confirmBtn.addEventListener('click', () => closeModal(true));
+            cancelBtn.addEventListener('click', () => closeModal(false));
+            overlay.addEventListener('click', e => {
+                if (e.target === overlay) closeModal(false);   // click on backdrop cancels
+            });
+
+            document.addEventListener('keydown', e => {
+                if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+                /* modal takes over the keyboard while open */
+                if (modalOpen()) {
+                    if (e.key === 'Escape') { e.preventDefault(); closeModal(false); }
+                    else if (e.key === 'Enter') { e.preventDefault(); closeModal(true); }
+                    return;
+                }
+
+                const k = e.key;
+                if (k >= '1' && k <= '9') { e.preventDefault(); rows[+k - 1].focus(); cur = +k - 1; }
+                else if (k === 'ArrowDown' || k === 'ArrowUp') {
+                    e.preventDefault();
+                    cur = (cur + (k === 'ArrowDown' ? 1 : -1) + 9) % 9;
+                    rows[cur].focus();
+                }
+                else if (k === '0' || k.toLowerCase() === 'h' || k.toLowerCase() === 'f') {
+                    const m = { 0: 0, h: 0.5, f: 1 }[k.toLowerCase()];
+                    setScore(cur, m);
+                }
+                else if (k === 'c' || k === 'C') copyScore();
+                else if (k === 'r' || k === 'R') resetRequest();
+                else if (k === 'Escape') document.activeElement?.blur?.();
+            });
+
+            render();
+            rows[0].focus();   // ready to score immediately — 0 / H / F works right away
+        })();
+    </script>
+</body>
+
+</html>
